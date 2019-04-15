@@ -1,6 +1,6 @@
 {
   "name": "vue-action-pannel",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "vue, action-sheet, pannel",
   "main": "/dist/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
     "dev": "webpack-dev-server --inline --progress --config demo/webpack.dev.config.js"
   },
   "dependencies": {
-    "vue-create-api": "^0.2.0"
   },
   "devDependencies": {
+    "vue-create-api": "^0.2.0",
     "@babel/core": "^7.4.3",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
