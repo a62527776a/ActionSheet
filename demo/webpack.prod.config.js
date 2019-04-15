@@ -1,6 +1,6 @@
 const path = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: {
@@ -8,35 +8,40 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname + '/dist'),
-    filename: 'vue-fab.js'
+    filename: 'index.js'
   },
   module: {
     rules: [{
       test: /\.vue$/,
-      loader: "vue-loader"
+      loader: 'vue-loader'
+    },{
+      test: /\.pug$/,
+      loader: 'pug-plain-loader'
     }, {
       test: /\.js$/,
-      loader: 'babel-loader',
+      loader: [
+        'babel-loader'
+      ],
       exclude: /node_modules/
     }, {
-      test: /\.css$/,
-      loader: 'style!css!autoprefixer'
-    }, {
-      test: /\.less$/,
-      loader: 'style!less'
+      test: /\.sass$/,
+      use: [
+        'vue-style-loader',
+        'css-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            indentedSyntax: true
+          }
+        }
+      ]
     }]
   },
-  devServer: {
-    inline: true
-  },
+  devtool: false,
   plugins: [
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        warnings: false
-      }
-    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './index.html')
-    })
+    }),
+    new VueLoaderPlugin()
   ]
 }

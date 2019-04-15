@@ -1,5 +1,4 @@
 const path = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
@@ -43,11 +42,6 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   plugins: [
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        warnings: false
-      }
-    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './index.html')
     }),
