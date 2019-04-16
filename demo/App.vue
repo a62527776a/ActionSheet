@@ -5,6 +5,21 @@
     .btn.btn-lg.btn-block.btn-info(@click="openPannel2") 打开多行ActionPannel
     br
     pre 
+      div data () {
+      div   return {
+      div     actions: [{
+      div       icon: 'icon-article',
+      div       text: '分享'
+      div     }, {
+      div       icon: 'icon-xiazai46',
+      div       text: '客服'
+      div     }, {
+      div       icon: 'icon-yidong',
+      div       text: '移动'
+      div     }]
+      div   }
+      div }
+
       div let actionPannel = this.$createActionPannel({ // 函数式调用
       div   $props: {
       div     actions: this.actions // 传入列表项
