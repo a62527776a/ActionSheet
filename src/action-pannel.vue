@@ -2,7 +2,9 @@
   .action-panel-wrapper
     transition(name="fade")
       .oMask(@click="closePannel" v-if="open")
-    .action-panel-bar(:class="{'action-panel-active' : open}" 
+    .action-panel-bar(
+      ref="action-panel-bar" 
+      :style="{'transform' : 'translateY(' + computedPannelHeight + 'px)'}"
       @transitionend="transitionEnd")
       .action-panel
         .action-item(v-for="(item, idx) in actions" @click="clickHandle(item, idx)")
@@ -44,6 +46,17 @@ export default {
       })
     }
   },
+  computed: {
+    computedPannelHeight: function () {
+      if (!this.open) {
+        if (this.$refs['action-panel-bar']) {
+          return this.$refs['action-panel-bar'].offsetHeight
+        }
+      } else {
+        return 0
+      }
+    }
+  },
   mounted () {
     this.open = true
   }
@@ -76,21 +89,19 @@ $supperColor: #eee;
     bottom: 0
     transition: all .3s;
     z-index: 99
-    transform: translateY(169px)
-  .action-panel-active
-    transform: translateY(0)
   .action-panel
     border-radius: 3px 3px 0 0
     width: 100vw;
     background: white;
-    height: 116px;
     z-index: 99
-    padding: 30px
+    padding: 30px 15px 15px
     @include flex($justifyContent: flex-start)
+    flex-wrap: wrap;
     .action-item
       @include flex($flex: none, $flexDirection: column)
-      margin-right: 41px
       color: #555;
+      width: calc((100vw - 30px) / 6)
+      margin-bottom: 12px;
       .action-icon
         font-size: 30px
         margin-bottom: 6px
