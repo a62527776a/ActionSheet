@@ -12,8 +12,14 @@
   <br>
 </p>
 
+
+
+![预览](https://upload-images.jianshu.io/upload_images/5738345-81fb96441c718133.gif?imageMogr2/auto-orient/strip)
+
 **[live demo](https://dscsdoj.top/public/vue-action-pannel/index.html)**
 
+#### What's this
+###### 基于 vue-create-api 的活动面板 用于展示不同的操作接口
 
 ## Installation and use
 
@@ -39,9 +45,10 @@ new Vue({
 ```
 data () {
   return {
+    // 初始化以下格式的list
     actions: [{
-      icon: 'icon-article',
-      text: '分享'
+      icon: 'icon-article', // 引入iconfont的类名作为展示的icon
+      text: '分享' // 引入文字作为标题
     }, {
       icon: 'icon-xiazai46',
       text: '客服'
@@ -53,14 +60,16 @@ data () {
 }
 
 methods: {
+  // 得益于vue-create-api
+  // 我们可以以函数的形式创建一个action-pannel
   openPannel: function () {
-    let actionPannel = this.$createActionPannel({ // 函数式调用
+    let actionPannel = this.$createActionPannel({ // 函数式调用 将返回一个Vue实例
       $props: {
         actions: this.actions // 传入列表项
       }
     }).$on('select', (e) => { // 暴露select事件
       window.alert(`click: ${e.idx}, params: ${JSON.stringify(e.item)}`) // 参数包含下标以及传入的菜单项
-      actionPannel.closePannel() // 选择后可选关闭
+      actionPannel.closePannel() // 完成操作后一定要使用closePannel函数来关闭这个面板哦
     })
   },
 }
