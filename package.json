@@ -8,8 +8,7 @@
     "demo-build": "webpack --config ./demo/webpack.prod.config.js",
     "dev": "webpack-dev-server --inline --progress --config demo/webpack.dev.config.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "vue-create-api": "^0.2.0",
     "@babel/core": "^7.4.3",

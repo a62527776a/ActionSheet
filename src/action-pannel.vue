@@ -35,6 +35,7 @@ export default {
   methods: {
     closePannel: function () {
       this.open = false
+      document.removeEventListener('touchmove', this.disableScroll)
     },
     transitionEnd: function () {
       if (!this.open) this.remove()
@@ -44,6 +45,9 @@ export default {
         item,
         idx
       })
+    },
+    disableScroll: function (e) {
+      e.preventDefault()
     }
   },
   computed: {
@@ -59,6 +63,7 @@ export default {
   },
   mounted () {
     this.open = true
+    document.addEventListener('touchmove', this.disableScroll, { passive: false })
   }
 }
 </script>
