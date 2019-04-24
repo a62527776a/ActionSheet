@@ -14,7 +14,7 @@
 
 
 
-![预览](https://upload-images.jianshu.io/upload_images/5738345-81fb96441c718133.gif?imageMogr2/auto-orient/strip)
+![demo1.gif](https://upload-images.jianshu.io/upload_images/5738345-8c7f1d5d20c1e2c7.gif?imageMogr2/auto-orient/strip)
 
 **[live demo](https://dscsdoj.top/public/vue-action-pannel/index.html)**
 
