@@ -2,15 +2,15 @@
   .action-panel-wrapper
     transition(name="fade")
       .oMask(@click="closePannel" v-if="open")
-    .action-panel-bar(
-      ref="action-panel-bar"
-      :style="{'transform' : 'translateY(' + computedPannelHeight + 'px)'}"
-      @transitionend="transitionEnd")
-      .action-panel
-        .action-item(v-for="(item, idx) in actions" @click="clickHandle(item, idx)")
-          .action-icon.iconfont(:class="item.icon")
-          .action-text {{item.text}}
-      .action-button(@click="closePannel") 取消
+    transition(name="out-in")
+      .action-panel-bar(
+        ref="action-panel-bar"
+        v-if="open")
+        .action-panel
+          .action-item(v-for="(item, idx) in actions" @click="clickHandle(item, idx)")
+            .action-icon.iconfont(:class="item.icon")
+            .action-text {{item.text}}
+        .action-button(@click="closePannel") 取消
 </template>
 
 <script>
@@ -35,10 +35,10 @@ export default {
   methods: {
     closePannel: function () {
       this.open = false
+      setTimeout(() => {
+        this.remove()
+      }, 300)
       document.removeEventListener('touchmove', this.disableScroll)
-    },
-    transitionEnd: function () {
-      if (!this.open) this.remove()
     },
     clickHandle: function (item, idx) {
       this.$emit('select', {
@@ -50,20 +50,18 @@ export default {
       e.preventDefault()
     }
   },
-  computed: {
-    computedPannelHeight: function () {
-      if (!this.open) {
-        if (this.$refs['action-panel-bar']) {
-          return this.$refs['action-panel-bar'].offsetHeight
-        }
-      } else {
-        return 0
-      }
-    }
-  },
   mounted () {
     this.open = true
     document.addEventListener('touchmove', this.disableScroll, { passive: false })
+  },
+  activated () {
+    document.addEventListener('touchmove', this.disableScroll, { passive: false })
+  },
+  deactivated () {
+    document.removeEventListener('touchmove', this.disableScroll)
+  },
+  destroyed () {
+    document.removeEventListener('touchmove', this.disableScroll)
   }
 }
 </script>
@@ -79,6 +77,10 @@ export default {
   transition: opacity .2s;
 .fade-enter, .fade-leave-to
   opacity: 0
+.out-in-enter, .out-in-leave-to
+  transform: translateY(360px)
+.out-in-enter-to, .out-in-leave
+  transform: translateY(0)
 $supperColor: #eee;
 .action-panel-wrapper
   .oMask
