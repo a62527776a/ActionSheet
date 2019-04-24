@@ -74,3 +74,31 @@ methods: {
   },
 }
 ```
+
+# props
+
+| name    | type  | desc    |  
+| --------| ----- |------   |
+| actions | action | 活动列表 由一个个活动项数组组成 即[action, action, action] action对象结构为{icon: 'xxx', text: 'xxx'} |
+
+# methods
+| name | desc |
+| ---- | ---- |
+|closePannel | 关闭该pannel 必须在select事件后执行 将会关闭pannel以及展示相应的效果 |
+
+# event
+| name | params | desc |
+| ------ | ------ | ------ |
+|  select| Object | 点击每个活动项后会触发一个select事件 select事件将会回调一个包含下标和选中的活动项对象(包含该活动项的icon以及标题)  |
+
+```
+let actionPannel = this.$createActionPannel({ // 函数式调用 将返回一个Vue实例
+  $props: {
+    actions: this.actions // 传入列表项
+  }
+})
+actionPannel.$on('select', (e) => { // 暴露select事件
+  console.log(e) // { idx: 0, item: { icon: 'icon-xiazai46', text: '客服' } }
+  actionPannel.closePannel() // 完成操作后一定要使用closePannel函数来关闭这个面板哦
+})
+```
