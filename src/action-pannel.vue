@@ -3,7 +3,7 @@
     transition(name="fade")
       .oMask(@click="closePannel" v-if="open")
     .action-panel-bar(
-      ref="action-panel-bar" 
+      ref="action-panel-bar"
       :style="{'transform' : 'translateY(' + computedPannelHeight + 'px)'}"
       @transitionend="transitionEnd")
       .action-panel

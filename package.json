@@ -1,8 +1,8 @@
 {
   "name": "vue-action-pannel",
-  "version": "0.0.4",
+  "version": "0.0.9",
   "description": "vue, action-sheet, pannel",
-  "main": "/dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
     "demo-build": "webpack --config ./demo/webpack.prod.config.js",
